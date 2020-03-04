@@ -28,9 +28,9 @@ app.use("/", home);
 // If collection is not exists it will create automatically and document too (Hero -> heros happen automatically)
 async function connectDb() {
   try {
-    await mongoose.connect("mongodb://localhost/herodb", {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
+    await mongoose.connect('mongodb+srv://shashila:1995heshan@cluster0-d5sv8.mongodb.net/test', {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
     });
 
     console.log("Database connected!");
