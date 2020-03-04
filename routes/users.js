@@ -9,7 +9,7 @@ router.post("/", async (req, res) => {
     email: req.body.email,
     password: req.body.password
   });
-  let user = await user.save();
+  await user.save();
   return res.send();
 });
 
