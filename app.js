@@ -11,7 +11,7 @@ const emailSender = require("./middleware/email-sender");
 
 const app = express();
 
-connectDb();
+await connectDb();
 
 // serves for every route
 app.use(cors());
@@ -24,19 +24,23 @@ app.use("/api/heroes", heroes);
 app.use("/api/users", users);
 app.use("/", home);
 
-
 // If collection is not exists it will create automatically and document too (Hero -> heros happen automatically)
 async function connectDb() {
   try {
-    await mongoose.connect('mongodb+srv://shashila:1995heshan@cluster0-d5sv8.mongodb.net/test', {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
+    mongoose.connect(
+      "mongodb+srv://shashila:1995heshan@cluster0-d5sv8.mongodb.net/test",
+      { useNewUrlParser: true }
+    );
+    const conn = mongoose.connection;
+    mongoose.connection.once("open", () => {
+      console.log("MongoDB Connected");
     });
-
-    console.log("Database connected!");
+    mongoose.connection.on("error", (err) => {
+      console.log("MongoDB connection error: ", err);
+    });
   } catch (error) {
     console.log(error.message);
   }
 }
 
-app.listen(process.env.PORT || 5000)
+app.listen(process.env.PORT || 5000);
