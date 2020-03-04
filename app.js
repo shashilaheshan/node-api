@@ -24,7 +24,6 @@ app.use("/api/heroes", heroes);
 app.use("/api/users", users);
 app.use("/", home);
 
-const port = 8081;
 
 // If collection is not exists it will create automatically and document too (Hero -> heros happen automatically)
 async function connectDb() {
@@ -40,6 +39,4 @@ async function connectDb() {
   }
 }
 
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
-});
+app.listen(process.env.PORT || 5000)
