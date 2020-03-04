@@ -19,7 +19,9 @@ router.get('/', async (req, res) => {
         res.status(500).send(error.message);
     }
 });
-
+router.get('/hero',async(req,res)=>{
+ res.send("hero working")
+});
 router.get('/:heroId', async (req, res) => {
     try {
         // let heroRequested = await Hero.find({_id: req.params.heroId});
